@@ -12,17 +12,14 @@ const doc = {
       description: "",
     },
   ],
-  components: {
-    securitySchemes: {
-      bearerAuth: {
-        type: "http",
-        scheme: "bearer",
-      },
-    },
-  },
+  components: {},
 };
 
 const outputFile = "./swagger.json";
 const endpointsFiles = ["./index.ts"];
 
-swaggerAutogen({ openapi: "3.0.0" })(outputFile, endpointsFiles, doc);
+swaggerAutogen({ openapi: "3.0.0" })(outputFile, endpointsFiles, doc).then(
+  async () => {
+    await import("../../index");
+  }
+);
